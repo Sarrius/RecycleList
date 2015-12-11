@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">21v</string>
+    <string name="action_settings">Settings</string>
+    <string name="person_name">person name</string>
+    <string name="person_data">person info</string>
+    <string name="add_person">Add person></string>
+
+</resources>
