@@ -4,5 +4,7 @@
     <string name="person_name">person name</string>
     <string name="person_data">person info</string>
     <string name="add_person">Add person></string>
+    <string name="some_data">someData</string>
+    <string name="title_activity_second">SecondActivity</string>
 
 </resources>

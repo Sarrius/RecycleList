@@ -6,11 +6,11 @@ package com.example.sars2.a21v;
 public class Person {
 
     String name;
-    String age;
+    String description;
 
-    Person(String name, String age) {
+    Person(String name, String description) {
         this.name = name;
-        this.age = age;
+        this.description = description;
 
     }
 }

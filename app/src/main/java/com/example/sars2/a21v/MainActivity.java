@@ -1,6 +1,7 @@
 package com.example.sars2.a21v;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,19 +12,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     private RVAdapter mAdapter;
-    private EditText mPersonDescription;
-    private EditText mPersonName;
-    private List<Person> persons;
+    private EditText mEditTextPersonDescription;
+    private EditText mEditTextPersonName;
+    private List <Person> persons;
     private RecyclerView mRecicleView;
     private FloatingActionButton mFloatingActionButton;
     private Dialog mDialog;
+
 
 
 
@@ -32,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        mRecicleView = (RecyclerView)findViewById(R.id.rv);
 
+        mRecicleView = (RecyclerView)findViewById(R.id.rv);
         mFloatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,12 +47,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
+        final LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecicleView.setLayoutManager(llm);
         mRecicleView.setHasFixedSize(true);
-
+        mRecicleView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                mRecicleView.getChildItemId(llm.getFocusedChild());
+                startNewActivity(position);
+            }
+        }));
         initializeData();
         initializeAdapter();
+
+    }
+    private void startNewActivity (int itemPosition){
+        Intent activityIntent = new Intent(getApplicationContext(), SecondActivity.class);
+     //   activityIntent.putExtra(Constants.keys.KEY_PERSON_NAME, persons.get(itemPosition).name);
+        startActivity(activityIntent);
+    }
+    private void toast (String msg){
+
+        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+
     }
 
     private void alertDialog () {
@@ -56,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         mDialog.setTitle(R.string.add_person);
         View contentView = mDialog.getLayoutInflater().inflate(R.layout.dialog_person, null);
         mDialog.setContentView(contentView);
-        mPersonName = (EditText)contentView.findViewById(R.id.personName);
-        mPersonDescription = (EditText)contentView.findViewById(R.id.person_info);
+        mEditTextPersonName = (EditText)contentView.findViewById(R.id.personName);
+        mEditTextPersonDescription = (EditText)contentView.findViewById(R.id.person_info);
         Button confirmButton = (Button)mDialog.findViewById(R.id.button_confirm);
         Button cancellButton = (Button)mDialog.findViewById(R.id.button_cancell);
         mDialog.show();
@@ -68,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
            public void onClick(View v) {
 
                persons.add(new Person(
-                       mPersonName.getText().toString(),
-                       mPersonDescription.getText().toString()));
+                       mEditTextPersonName.getText().toString(),
+                       mEditTextPersonDescription.getText().toString()));
                mDialog.dismiss();
                        mAdapter.notifyDataSetChanged();
 
