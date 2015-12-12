@@ -12,14 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-
 
     private RVAdapter mAdapter;
     private EditText mEditTextPersonDescription;
@@ -28,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecicleView;
     private FloatingActionButton mFloatingActionButton;
     private Dialog mDialog;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,23 +48,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 mRecicleView.getChildItemId(llm.getFocusedChild());
-                startNewActivity(position);
+                Intent activityIntent = new Intent(getApplicationContext(), SecondActivity.class);
+                activityIntent.putExtra(Constants.keys.KEY_PERSON_NAME, persons.get(position).name);
+                startActivity(activityIntent);
             }
         }));
         initializeData();
         initializeAdapter();
 
     }
-    private void startNewActivity (int itemPosition){
-        Intent activityIntent = new Intent(getApplicationContext(), SecondActivity.class);
-     //   activityIntent.putExtra(Constants.keys.KEY_PERSON_NAME, persons.get(itemPosition).name);
-        startActivity(activityIntent);
-    }
-    private void toast (String msg){
 
-        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 
-    }
 
     private void alertDialog () {
 

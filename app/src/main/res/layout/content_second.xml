@@ -10,6 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sars2.a21v.SecondActivity"
-    tools:showIn="@layout/activity_second2">
+    tools:showIn="@layout/activity_second">
 
 </RelativeLayout>

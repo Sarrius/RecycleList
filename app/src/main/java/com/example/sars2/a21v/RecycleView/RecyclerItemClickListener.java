@@ -1,4 +1,4 @@
-package com.example.sars2.a21v;
+package com.example.sars2.a21v.RecycleView;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

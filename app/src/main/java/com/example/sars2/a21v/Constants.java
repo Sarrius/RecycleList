@@ -9,4 +9,12 @@ public class Constants {
          public static String KEY_PERSON_NAME = "Person_Name";
          public static   String KEY_PERSON_DESCRIPTION = "Person_Description";
     }
+
+
+    public static String DATABASE_FILE_NAME = "databasefile.db";
+    public static int DATABASE_VERSION_1 = 1;
+    public static String DATABASE_TABLE_NAME = "table";
+    public static String TABLE_COLUMN_ID = "ID";
+    public static String TABLE_COLUMN_FOR_NAME = "name";
+    public static String TABLE_COLUMN_FOR_INFO = "info";
 }
