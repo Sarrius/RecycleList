@@ -13,10 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.sars2.a21v.Database.DBHelper;
+import com.example.sars2.a21v.RecycleView.RecyclerItemClickListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
 
     private RVAdapter mAdapter;
     private EditText mEditTextPersonDescription;
@@ -25,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecicleView;
     private FloatingActionButton mFloatingActionButton;
     private Dialog mDialog;
-
+    private DBHelper mDBHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
+        
         mRecicleView = (RecyclerView)findViewById(R.id.rv);
         mFloatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(activityIntent);
             }
         }));
+
+
         initializeData();
         initializeAdapter();
 
@@ -96,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeData(){
         persons = new ArrayList<>();
+
+
+
     }
 
     private void initializeAdapter(){

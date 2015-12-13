@@ -19,7 +19,7 @@ public class SecondActivity extends AppCompatActivity {
 
     private void getData (){
         String s = new String(getIntent().getExtras().getString(Constants.keys.KEY_PERSON_NAME));
-         mData.setText(s);
+        mData.setText(s);
 
     }
 

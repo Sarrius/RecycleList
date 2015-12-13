@@ -8,10 +8,18 @@ public class Person {
     String name;
     String description;
 
-    Person(String name, String description) {
+    public Person(String name, String description) {
         this.name = name;
         this.description = description;
 
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {
