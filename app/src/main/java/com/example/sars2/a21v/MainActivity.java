@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private RVAdapter mAdapter;
     private EditText mEditTextPersonDescription;
     private EditText mEditTextPersonName;
@@ -30,11 +30,14 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton mFloatingActionButton;
     private Dialog mDialog;
     private DBHelper mDBHelper;
+    private Person person;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         mRecicleView = (RecyclerView)findViewById(R.id.rv);
         mFloatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -80,11 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
            @Override
            public void onClick(View v) {
-               persons.add(new Person(
-                       mEditTextPersonName.getText().toString(),
-                       mEditTextPersonDescription.getText().toString()));
+               person = new Person(mEditTextPersonName.getText().toString(),mEditTextPersonDescription.getText().toString());
+               persons.add(person);
                mDialog.dismiss();
-                       mAdapter.notifyDataSetChanged();
+               mAdapter.notifyDataSetChanged();
 
            }
        });
@@ -99,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeData(){
         persons = new ArrayList<>();
-        mDBHelper = new DBHelper(this, null, null, Constants.DATABASE_VERSION_1);
+        mDBHelper = new DBHelper(this,null);
+        Log.d("DATABASE", mDBHelper.getDatabaseName()+ "EXISTS");
 
     }
 

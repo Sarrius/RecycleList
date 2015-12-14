@@ -17,23 +17,26 @@ import java.util.List;
  */
 public class DBHelper extends SQLiteOpenHelper {
 
-
-
-
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public DBHelper(Context context,  SQLiteDatabase.CursorFactory factory) {
         super(context, Constants.DATABASE_FILE_NAME, factory, Constants.DATABASE_VERSION_1);
 
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + Constants.DATABASE_TABLE_NAME + "(" +
-                Constants.TABLE_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT " +
-                Constants.TABLE_COLUMN_FOR_NAME + " TEXT " +
+
+//        String CREATE_BOOK_TABLE = "CREATE TABLE books ( " +
+//                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                "title TEXT, "+
+//                "author TEXT )";
+
+        String query = "CREATE TABLE " + Constants.DATABASE_TABLE_NAME + " ( " +
+                Constants.TABLE_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                Constants.TABLE_COLUMN_FOR_NAME + " TEXT, " +
                 Constants.TABLE_COLUMN_FOR_INFO + " TEXT " +
                 ");";
-
         db.execSQL(query);
+
     }
 
     @Override
