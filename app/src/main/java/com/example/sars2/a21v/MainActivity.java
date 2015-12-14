@@ -32,11 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private DBHelper mDBHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
-        
         mRecicleView = (RecyclerView)findViewById(R.id.rv);
         mFloatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog();
             }
         });
-
         final LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecicleView.setLayoutManager(llm);
         mRecicleView.setHasFixedSize(true);
@@ -83,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
            @Override
            public void onClick(View v) {
-
                persons.add(new Person(
                        mEditTextPersonName.getText().toString(),
                        mEditTextPersonDescription.getText().toString()));
@@ -103,8 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeData(){
         persons = new ArrayList<>();
-
-
+        mDBHelper = new DBHelper(this, null, null, Constants.DATABASE_VERSION_1);
 
     }
 
