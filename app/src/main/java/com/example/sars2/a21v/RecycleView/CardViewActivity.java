@@ -14,14 +14,7 @@ public class CardViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.cardview_activity);
-        personName = (TextView)findViewById(R.id.person_name);
-        personAge = (TextView)findViewById(R.id.person_age);
-
-
-        personName.setText("");
-        personAge.setText("");
-
+        personName = (TextView)findViewById(R.id.prsn_description);
+        personAge = (TextView)findViewById(R.id.prsn_name);
     }
 }

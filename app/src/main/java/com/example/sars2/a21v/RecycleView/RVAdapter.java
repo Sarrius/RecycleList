@@ -1,4 +1,4 @@
-package com.example.sars2.a21v;
+package com.example.sars2.a21v.RecycleView;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,32 +6,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.sars2.a21v.Person;
+import com.example.sars2.a21v.R;
+
 import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder  {
 
-
         private TextView mPersonName;
         private TextView mPersonAge;
+        private CardViewActivity mCardViewActivity;
 
 
         PersonViewHolder(View itemView) {
             super(itemView);
-
             mPersonName = (TextView)itemView.findViewById(R.id.person_name);
             mPersonAge = (TextView)itemView.findViewById(R.id.person_age);
+            mCardViewActivity = new CardViewActivity();
 
         }
 
-
     }
 
-    List<Person> persons;
+    List<Person> mPersons;
 
-    RVAdapter(List<Person> persons){
-        this.persons = persons;
+    public RVAdapter(List<Person> persons){
+        this.mPersons = persons;
     }
 
     @Override
@@ -44,18 +46,18 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false);
         PersonViewHolder pvh = new PersonViewHolder(v);
         return pvh;
-        //розібратись шо я тут зробив
+
     }
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        personViewHolder.mPersonName.setText(persons.get(i).name);
-        personViewHolder.mPersonAge.setText(persons.get(i).description);
 
+        personViewHolder.mPersonName.setText(mPersons.get(i).getName());
+        personViewHolder.mPersonAge.setText(mPersons.get(i).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return persons.size();
+        return mPersons.size();
     }
 }

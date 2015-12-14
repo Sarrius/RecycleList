@@ -5,28 +5,29 @@ package com.example.sars2.a21v;
  */
 public class Person {
 
-    String name;
-    String description;
+    String mName;
+    String mDescription;
 
     public Person(String name, String description) {
-        this.name = name;
-        this.description = description;
+
+        this.mName = name;
+        this.mDescription = description;
 
     }
 
     public void setName(String name){
-        this.name = name;
+        this.mName = name;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.mDescription = description;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public String getDescription() {
-        return description;
+        return mDescription;
     }
 }
