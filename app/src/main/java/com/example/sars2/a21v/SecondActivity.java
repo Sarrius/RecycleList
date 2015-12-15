@@ -7,21 +7,24 @@ import android.widget.TextView;
 public class SecondActivity extends AppCompatActivity {
 
     private TextView mData;
+    private TextView mInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        mData = (TextView)findViewById(R.id.some_data);
+        mData = (TextView)findViewById(R.id.some_person_data);
+        mInfo = (TextView)findViewById(R.id.some_person_info);
         getData();
 
     }
 
     private void getData (){
-        String s = new String(getIntent().getExtras().getString(Constants.keys.KEY_PERSON_NAME));
-        mData.setText(s);
+        String receivedName = new String(getIntent().getExtras().getString(Constants.keys.KEY_PERSON_NAME));
+        String receivedInfo = new String(getIntent().getExtras().getString(Constants.keys.KEY_PERSON_DESCRIPTION));
+        mData.setText(receivedName);
+        mInfo.setText(receivedInfo);
 
     }
-
 
 }
