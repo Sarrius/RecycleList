@@ -1,6 +1,5 @@
 package com.example.sars2.a21v.RecycleView;
 
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +17,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
 
         private TextView mPersonName;
         private TextView mPersonAge;
-        private CardView mCardView;
-
 
         PersonViewHolder(View itemView) {
             super(itemView);
             mPersonName = (TextView)itemView.findViewById(R.id.person_name);
             mPersonAge = (TextView)itemView.findViewById(R.id.person_age);
-            mCardView = (CardView)itemView.findViewById(R.id.cv);
-
         }
 
     }

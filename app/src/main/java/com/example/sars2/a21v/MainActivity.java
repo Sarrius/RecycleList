@@ -2,7 +2,6 @@ package com.example.sars2.a21v;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -23,8 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FloatingActionButton mSync;
     private RVAdapter mAdapter;
+    private RecyclerView.ItemDecoration dividerItemDecoration;
     private EditText mEditTextPersonDescription;
     private EditText mEditTextPersonName;
     private List <Person> persons;
@@ -37,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        dividerItemDecoration = new RecyclerView.ItemDecoration() {
+        };
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecycleView = (RecyclerView)findViewById(R.id.rv);
@@ -48,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         final LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.supportsPredictiveItemAnimations();
         mRecycleView.setLayoutManager(llm);
         mRecycleView.setHasFixedSize(true);
+        mRecycleView.addItemDecoration(dividerItemDecoration);
+
         mRecycleView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -70,16 +74,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void syncData (){
-
-        AsyncTask asyncTask = new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                persons.addAll(mDBHelper.getPersonsList());
-                mAdapter.notifyDataSetChanged();
-                return null;
-            }
-        };
-        asyncTask.execute();
+        persons.addAll(mDBHelper.getPersonsList());
+        mAdapter.notifyDataSetChanged();
     }
 
     private void showDialog () {
@@ -121,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
         persons = new ArrayList<>();
         mDBHelper = new DBHelper(this,null);
-
-
 
     }
 

@@ -12,4 +12,11 @@
     tools:context="com.example.sars2.a21v.SecondActivity"
     tools:showIn="@layout/activity_second">
 
+    <TextView
+        android:id="@+id/some_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/some_data"
+        android:textAlignment="center"/>
+
 </RelativeLayout>

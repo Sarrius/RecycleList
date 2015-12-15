@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cv="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginTop="2dp"
     android:id="@+id/cv"
+    cv:paddingStart="@dimen/one_pixel"
+    cv:paddingEnd="@dimen/one_pixel"
+    cv:cardCornerRadius="7dp"
     cv:cardUseCompatPadding="true"
-    cv:cardElevation="4dp">
+    cv:cardElevation="6dp"
+    android:padding="@dimen/one_pixel">
 
     <RelativeLayout
+
         android:id="@+id/row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:elevation="2dp"
-        >
-
-
+        android:padding="30dp"
+        android:elevation="5dp"
+        android:gravity="top">
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +36,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/person_age"
-
             android:layout_below="@+id/person_name"
             />
 
