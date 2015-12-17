@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="one_pixel">1dp</dimen>
+    <dimen name="person_info_size">30sp</dimen>
+    <dimen name="person_name_size">50sp</dimen>
 </resources>

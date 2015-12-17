@@ -10,24 +10,21 @@
     cv:paddingStart="@dimen/one_pixel"
     cv:paddingEnd="@dimen/one_pixel"
     cv:cardCornerRadius="7dp"
-    cv:cardUseCompatPadding="true"
+    cv:cardUseCompatPadding="false"
     cv:cardElevation="6dp"
     android:padding="@dimen/one_pixel">
 
     <RelativeLayout
-
         android:id="@+id/row"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="30dp"
-        android:elevation="5dp"
-        android:gravity="top">
+        android:elevation="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/person_name"
-
             android:layout_alignParentTop="true"
             android:textSize="30sp"
             />

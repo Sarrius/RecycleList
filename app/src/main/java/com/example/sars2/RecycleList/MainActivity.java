@@ -1,4 +1,4 @@
-package com.example.sars2.a21v;
+package com.example.sars2.RecycleList;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -7,15 +7,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.example.sars2.a21v.Database.DBHelper;
-import com.example.sars2.a21v.RecycleView.RVAdapter;
-import com.example.sars2.a21v.RecycleView.RecyclerItemClickListener;
+import com.example.sars2.RecycleList.Backup.DataBackupAgent;
+import com.example.sars2.RecycleList.Database.DBHelper;
+import com.example.sars2.RecycleList.RecycleView.RVAdapter;
+import com.example.sars2.RecycleList.RecycleView.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,24 +23,65 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private RVAdapter mAdapter;
-    private RecyclerView.ItemDecoration dividerItemDecoration;
     private EditText mEditTextPersonDescription;
     private EditText mEditTextPersonName;
     private List <Person> persons;
     private RecyclerView mRecycleView;
     private FloatingActionButton mFloatingActionButton;
+    private FloatingActionButton mTestButton;
+    private FloatingActionButton mDeleteButton;
     private Dialog mDialog;
     private DBHelper mDBHelper;
     private Person person;
+    private DataBackupAgent dataBackupAgent;
+    private TextView testText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        dividerItemDecoration = new RecyclerView.ItemDecoration() {
-        };
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dataBackupAgent = new DataBackupAgent();
+
+        initUI();
+        initializeData();
+        initializeAdapter();
+        syncData();
+
+    }
+
+    private void initUI (){
+        testText = (TextView)findViewById(R.id.textViewTest);
         mRecycleView = (RecyclerView)findViewById(R.id.rv);
+        final LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.supportsPredictiveItemAnimations();
+        mRecycleView.setLayoutManager(llm);
+        mRecycleView.setHasFixedSize(true);
+        mRecycleView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                mRecycleView.getChildItemId(llm.getFocusedChild());
+                Intent activityIntent = new Intent(getApplicationContext(), SecondActivity.class);
+                activityIntent.putExtra(Constants.keys.KEY_PERSON_NAME, persons.get(position).getName());
+                activityIntent.putExtra(Constants.keys.KEY_PERSON_DESCRIPTION, persons.get(position).getDescription());
+                startActivity(activityIntent);
+            }
+        }));
+
+        mDeleteButton = (FloatingActionButton)findViewById(R.id.btn_delete);
+        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDBHelper.deleteTable();
+            }
+        });
+        mTestButton = (FloatingActionButton)findViewById(R.id.test_btn);
+        mTestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backupData();
+            }
+        });
         mFloatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,34 +89,18 @@ public class MainActivity extends AppCompatActivity {
                 showDialog();
             }
         });
-        final LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.supportsPredictiveItemAnimations();
-        mRecycleView.setLayoutManager(llm);
-        mRecycleView.setHasFixedSize(true);
-        mRecycleView.addItemDecoration(dividerItemDecoration);
-
-        mRecycleView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                mRecycleView.getChildItemId(llm.getFocusedChild());
-                Intent activityIntent = new Intent(getApplicationContext(), SecondActivity.class);
-                activityIntent.putExtra(Constants.keys.KEY_PERSON_NAME, persons.get(position).getName());
-                startActivity(activityIntent);
-            }
-        }));
-
-        initializeData();
-        initializeAdapter();
-        syncData();
-    }
-
-    private void deleteTable (){
-        mDBHelper.deleteTable();
     }
 
     private void syncData (){
-        persons.addAll(mDBHelper.getPersonsList());
-        mAdapter.notifyDataSetChanged();
+
+            persons.addAll(mDBHelper.getPersonsList());
+            mAdapter.notifyDataSetChanged();
+    }
+
+    private void backupData () {
+        dataBackupAgent = new DataBackupAgent();
+        dataBackupAgent.requestBackup(this);
+
     }
 
     private void showDialog () {
@@ -114,34 +139,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeData(){
-
         persons = new ArrayList<>();
-        mDBHelper = new DBHelper(this,null);
-
+        mDBHelper = new DBHelper(this, Constants.DATABASE_FILE_NAME, null, Constants.DATABASE_VERSION_1);
     }
 
     private void initializeAdapter(){
         mAdapter = new RVAdapter(persons);
         mRecycleView.setAdapter(mAdapter);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
-    }
+
 }

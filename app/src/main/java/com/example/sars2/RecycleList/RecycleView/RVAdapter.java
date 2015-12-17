@@ -1,4 +1,4 @@
-package com.example.sars2.a21v.RecycleView;
+package com.example.sars2.RecycleList.RecycleView;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.sars2.a21v.Person;
-import com.example.sars2.a21v.R;
+import com.example.sars2.RecycleList.Person;
+import com.example.sars2.RecycleList.R;
 
 import java.util.List;
 
@@ -17,7 +17,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
 
         private TextView mPersonName;
         private TextView mPersonAge;
-
         PersonViewHolder(View itemView) {
             super(itemView);
             mPersonName = (TextView)itemView.findViewById(R.id.person_name);

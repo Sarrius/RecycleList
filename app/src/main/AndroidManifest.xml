@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sars2.a21v">
+    package="com.example.sars2.RecycleList">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:backupAgent=".Backup.DataBackupAgent"
+        android:restoreAnyVersion="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+             <meta-data android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAI9bzctVo0ypQQzlVWTyz4QCgdxfBstxIP0jb9KA" />
         <activity
-            android:name=".SecondActivity"
+            android:name="com.example.sars2.RecycleList.SecondActivity"
             android:label="@string/title_activity_second"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.sars2.RecycleList.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

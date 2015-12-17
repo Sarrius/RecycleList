@@ -1,4 +1,4 @@
-package com.example.sars2.a21v;
+package com.example.sars2.RecycleList;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
